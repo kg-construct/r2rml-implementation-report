@@ -8,18 +8,7 @@
 	dcterms:title "3 tables, one primary key, one foreign key" ;
 	dcterms:identifier "D014-3tables1primarykey1foreignkey" ;
 	rdb2rdftest:sqlScriptFile "create.sql";
-	rdb2rdftest:relatedTestCase <dg0014>, <tc0014a>, <tc0014b>, <tc0014c>, <tc0014d> ;
-.
-
-<dg0014> a rdb2rdftest:DirectMapping ;	
-	dcterms:title "Generation of direct graph from a database with primary key referencing candidate key"; 
-	dcterms:identifier "DirectGraphTC0014" ;
-	test:purpose "Test the generation of direct graph from a database with primary key referencing candidate key";
-	test:specificationReference "#lead-ex" ;
-	test:reviewStatus test:unreviewed ;
-	rdb2rdftest:database <d014> ;
-	rdb2rdftest:hasExpectedOutput true ;	
-	rdb2rdftest:output "directGraph.ttl" ;
+	rdb2rdftest:relatedTestCase <tc0014a>, <tc0014b>, <tc0014c>, <tc0014d> ;
 .
 
 <tc0014a> a rdb2rdftest:R2RML ;	
