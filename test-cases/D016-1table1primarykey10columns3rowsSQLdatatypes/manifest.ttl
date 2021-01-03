@@ -7,20 +7,8 @@
 	dcterms:title "One table, one primary key, ten columns, three rows with sql datatypes" ;
 	dcterms:identifier "D016-1table1primarykey10columns3rowsSQLdatatypes" ;
 	rdb2rdftest:sqlScriptFile "create.sql";
-	rdb2rdftest:relatedTestCase <dg0016>, <tc0016a>, <tc0016b>, <tc0016c>, <tc0016d>, <tc0016e> ;
+	rdb2rdftest:relatedTestCase <tc0016a>, <tc0016b>, <tc0016c>, <tc0016d>, <tc0016e> ;
 .
-
-<dg0016> a rdb2rdftest:DirectMapping ;	
-	dcterms:title "Generation of direct graph from a database with sql datatypes"; 
-	dcterms:identifier "DirectGraphTC0016" ;
-	test:purpose "Tests the generation of direct graph from a database with sql datatypes" ;
-	test:specificationReference "#lead-ex" ;
-	test:reviewStatus test:unreviewed ;
-	rdb2rdftest:database <d016> ;
-	rdb2rdftest:hasExpectedOutput true ;	
-	rdb2rdftest:output "directGraph.ttl" ;
-.
-
 
 <tc0016a> a rdb2rdftest:R2RML ;	
 	dcterms:title "Table with datatypes: string and integer" ; 
