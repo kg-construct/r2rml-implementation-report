@@ -7,18 +7,7 @@
 	dcterms:title "One table, a column, zero rows, no primary key" ;
 	dcterms:identifier "D000-1table1column0rows" ;
 	rdb2rdftest:sqlScriptFile "create.sql";
-	rdb2rdftest:relatedTestCase <dg0000>, <tc0000>;
-.
-
-<dg0000> a rdb2rdftest:DirectMapping;	
-	dcterms:title "Direct mapping of an empty table"; 
-	dcterms:identifier "DirectGraphTC0000" ;
-	test:purpose "Tests if an empty table produces an empty RDF graph" ;
-	test:specificationReference "#no-pk" ;
-	test:reviewStatus test:unreviewed ;
-	rdb2rdftest:hasExpectedOutput true ;
-	rdb2rdftest:database <d000> ;
-	rdb2rdftest:output "directGraph.ttl" ;
+	rdb2rdftest:relatedTestCase <tc0000>;
 .
 
 <tc0000> a rdb2rdftest:R2RML ;	
