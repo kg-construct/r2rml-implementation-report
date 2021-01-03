@@ -7,18 +7,7 @@
 	dcterms:title "One table, a primary key, three columns, three rows" ;
 	dcterms:identifier "D010-1table1primarykey3colums3rows" ;
 	rdb2rdftest:sqlScriptFile "create.sql";
-	rdb2rdftest:relatedTestCase <dg0010>, <tc0010a>, <tc0010b>, <tc0010c>  ;
-.
-
-<dg0010> a rdb2rdftest:DirectMapping ;	
-	dcterms:title "Generation of direct graph for table names with spaces"; 
-	dcterms:identifier "DirectGraphTC0010" ;
-	test:purpose "Tests the generation of the direct graph for table names with spaces" ;
-	test:specificationReference "#lead-ex" ;
-	test:reviewStatus test:unreviewed ;
-	rdb2rdftest:database <d010> ;
-	rdb2rdftest:hasExpectedOutput true ;	
-	rdb2rdftest:output "directGraph.ttl" ;
+	rdb2rdftest:relatedTestCase <tc0010a>, <tc0010b>, <tc0010c>  ;
 .
 
 <tc0010a> a rdb2rdftest:R2RML ;	
