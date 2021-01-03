@@ -7,18 +7,7 @@
 	dcterms:title "One table, three columns, one composite primary key, three rows, two languages" ;
 	dcterms:identifier "D015-1table3columns1composityeprimarykey3rows2languages" ;
 	rdb2rdftest:sqlScriptFile "create.sql";
-	rdb2rdftest:relatedTestCase <dg0015>, <tc0015a>, <tc0015b> ;
-.
-
-<dg0015> a rdb2rdftest:DirectMapping ;	
-	dcterms:title "Generation of direct graph from multi-column primary keys"; 
-	dcterms:identifier "DirectGraphTC0015" ;
-	test:purpose "Tests the generation of direct graph from multi-column primary keys" ;
-	test:specificationReference "#multi-key" ;
-	test:reviewStatus test:unreviewed ;
-	rdb2rdftest:database <d015> ;
-	rdb2rdftest:hasExpectedOutput true ;	
-	rdb2rdftest:output "directGraph.ttl" ;
+	rdb2rdftest:relatedTestCase <tc0015a>, <tc0015b> ;
 .
 
 <tc0015a> a rdb2rdftest:R2RML ;	
