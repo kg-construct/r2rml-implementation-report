@@ -7,18 +7,7 @@
 	dcterms:title "One table, one column, one row, no primary key" ;
 	dcterms:identifier "D001-1table1column1row" ;
 	rdb2rdftest:sqlScriptFile "create.sql";
-	rdb2rdftest:relatedTestCase <dg0001>, <tc0001a>, <tc0001b> ;
-.
-
-<dg0001> a rdb2rdftest:DirectMapping;	
-	dcterms:title "Direct mapping that generates a BlankNode"; 
-	dcterms:identifier "DirectGraphTC0001" ;
-	test:purpose "Tests: (1) one column mapping, no primary key; (2) generation of a \"BlankNode\" subject; (3) one column to one property" ;
-	test:specificationReference "#no-pk" ;
-	test:reviewStatus test:unreviewed ;
-	rdb2rdftest:database <d001> ;
-	rdb2rdftest:hasExpectedOutput true ;
-	rdb2rdftest:output "directGraph.ttl" ;
+	rdb2rdftest:relatedTestCase <tc0001a>, <tc0001b> ;
 .
 
 <tc0001a> a rdb2rdftest:R2RML ;	
