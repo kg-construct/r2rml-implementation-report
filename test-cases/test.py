@@ -1,5 +1,6 @@
 import os
 import sys
+import csv
 from configparser import ConfigParser, ExtendedInterpolation
 
 import psycopg2
@@ -18,6 +19,7 @@ def test(config, g):
     else:
         print("Database system declared in config file must be mysql or postgresql")
         return
+    results = [["tester", "platform", "testid", "result"]]
 
     for database_uri, p, o in g.triples((None, RDF.type, RDB2RDFTEST.DataBase)):
         d_identifier = g.value(subject=database_uri, predicate=DCELEMENTS.identifier, object=None)
@@ -39,14 +41,16 @@ def test(config, g):
 
         elif database_system == "postgresql":
             if "VARBINARY(200)" in contents:
-                contents = contents.replace("VARBINARY(200)", "BYTEA").replace("X'","'\\\\x")
+                contents = contents.replace("VARBINARY(200)", "BYTEA").replace("X'", "'\\\\x")
             cnx = psycopg2.connect("dbname='r2rml' user='r2rml' host='localhost' password='r2rml'")
             cursor = cnx.cursor()
             cursor.execute(contents)
             cnx.commit()
             cnx.close()
 
-        results = []
+
+
+
         for test_uri, p, o in g.triples((None, RDB2RDFTEST.database, database_uri)):
             t_identifier = g.value(subject=test_uri, predicate=DCELEMENTS.identifier, object=None)
             t_title = g.value(subject=test_uri, predicate=DCELEMENTS.title, object=None)
@@ -88,7 +92,7 @@ def test(config, g):
                 else:
                     result = "passed"
 
-            results.append({t_identifier: result})
+            results.append([config["metadata"]["tester"], config["metadata"]["platform"], t_identifier, result])
             print(t_identifier + "," + result)
 
     os.system("rm r2rml.ttl")
@@ -99,6 +103,12 @@ def test(config, g):
         os.system("docker-compose -f databases/docker-compose-postgresql.yml stop")
         os.system("docker-compose -f databases/docker-compose-postgresql.yml rm --force")
 
+    with open('results.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerows(results)
+
+    print("Generating the RDF results of the report using EARL dataset")
+    os.system("java -jar rmlmapper.jar -m mapping.rml.ttl -o results.ttl -d")
 
 if __name__ == "__main__":
 
