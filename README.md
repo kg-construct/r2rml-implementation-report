@@ -26,10 +26,11 @@ Connection properties for any RDBMS are: `database = r2rml, user = r2rml, passwo
 3. Pull request to the main repository with the updated information.
 4. Modify the test-cases/config.ini file with your information. Mapping path is always `test-cases/r2rml.ttl`.
 
+Example of the config file:
 ```
 [metadata]
 tester: https://dchaves.oeg-upm.net/ # URL of the tester 
-platform: https://morph.oeg.fi.upm.es/tool/morph-rdb # URL to the platform (e.g., GitHub)
+engine: https://morph.oeg.fi.upm.es/tool/morph-rdb # URL of the engine (e.g., GitHub repo)
 
 [properties]
 database_system: [mysql|postgresql]

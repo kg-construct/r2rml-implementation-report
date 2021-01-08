@@ -92,7 +92,7 @@ def test(config, g):
                 else:
                     result = "passed"
 
-            results.append([config["metadata"]["tester"], config["metadata"]["platform"], t_identifier, result])
+            results.append([config["metadata"]["tester"], config["metadata"]["engine"], t_identifier, result])
             print(t_identifier + "," + result)
 
     os.system("rm r2rml.ttl")
