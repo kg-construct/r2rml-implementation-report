@@ -107,7 +107,7 @@ def test(config, g):
         writer = csv.writer(file)
         writer.writerows(results)
 
-    print("Generating the RDF results of the report using EARL dataset")
+    print("Generating the RDF results using EARL vocabulary")
     os.system("java -jar rmlmapper.jar -m mapping.rml.ttl -o results.ttl -d")
 
 if __name__ == "__main__":

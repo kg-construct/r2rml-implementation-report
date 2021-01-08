@@ -27,7 +27,7 @@ map:om_2 a rr:ObjectMap;
     rml:reference "platform";
     rr:termType rr:IRI .
 map:om_3 a rr:ObjectMap;
-    rr:template "http://rml.io/test-cases/#{testid}";
+    rr:template "http://www.w3.org/2001/sw/rdb2rdf/test-cases/#{testid}";
     rr:termType rr:IRI .
 map:om_4 a rr:ObjectMap;
     rr:parentTriplesMap map:map_results_0;
