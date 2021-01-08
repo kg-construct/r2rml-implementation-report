@@ -24,7 +24,8 @@ Connection properties for any RDBMS are: `database = r2rml, user = r2rml, passwo
 2. Edit the file `info.csv` with the corresponding information of your engine.
 	- Usually the URL of your EARL report would be: https://raw.githubusercontent.com/[YOUR-USER]/r2rml-implementation-report/main/test-cases/results.ttl
 3. Pull request to the main repository with the updated information.
-4. Modify the test-cases/config.ini file with your information. Mapping path is always `test-cases/r2rml.ttl`.
+4. Clone the repository and copy the executable file (and other possible necessary files) of your engine to the test-cases folder.
+5. Modify the test-cases/config.ini file with your information. Mapping path is always `test-cases/r2rml.ttl`.
 
 Example of the config file:
 ```
@@ -39,7 +40,7 @@ output_format: ntriples # output format of the results from your engine
 engine_command: java -jar morph-rdb.jar -p properties.properties # command to run your engine
 ```
 
-5. Install the requirements of the script `python3 -m pip install requirements.txt`
-6. Run the script `python3 test.py config.ini`
-7. Your results will appear in `test-cases/results.ttl` in RDF and in `test-cases/results.csv` in CSV.
+6. Install the requirements of the script `python3 -m pip install requirements.txt`
+7. Run the script `python3 test.py config.ini`
+8. Your results will appear in `test-cases/results.ttl` in RDF and in `test-cases/results.csv` in CSV.
 
