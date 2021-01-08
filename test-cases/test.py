@@ -48,9 +48,6 @@ def test(config, g):
             cnx.commit()
             cnx.close()
 
-
-
-
         for test_uri, p, o in g.triples((None, RDB2RDFTEST.database, database_uri)):
             t_identifier = g.value(subject=test_uri, predicate=DCELEMENTS.identifier, object=None)
             t_title = g.value(subject=test_uri, predicate=DCELEMENTS.title, object=None)
@@ -73,7 +70,8 @@ def test(config, g):
                 # and expected output is true
                 if expected_output:
                     output_graph = Graph()
-                    output_graph.parse(config["properties"]["output_results"], format=config["properties"]["output_format"])
+                    output_graph.parse(config["properties"]["output_results"],
+                                       format=config["properties"]["output_format"])
                     # and graphs are equal
                     if compare.isomorphic(expected_output_graph, expected_output):
                         result = "passed"
@@ -109,6 +107,8 @@ def test(config, g):
 
     print("Generating the RDF results using EARL vocabulary")
     os.system("java -jar rmlmapper.jar -m mapping.rml.ttl -o results.ttl -d")
+    os.system("rm metadata.csv")
+
 
 if __name__ == "__main__":
 
@@ -126,5 +126,17 @@ if __name__ == "__main__":
     RDB2RDFTEST = Namespace("http://purl.org/NET/rdb2rdf-test#")
     TESTDEC = Namespace("http://www.w3.org/2006/03/test-description#")
     DCELEMENTS = Namespace("http://purl.org/dc/elements/1.1/")
+
+    metadata = [
+        ["tester_name", "tester_url", "tester_contact", "test_date", "engine_version", "engine_name", "engine_created",
+         "engine_url"],
+        [config["tester"]["tester_name"], config["tester"]["tester_url"], config["tester"]["tester_contact"],
+         config["engine"]["test_date"],
+         config["engine"]["engine_version"], config["engine"]["engine_name"], config["engine"]["engine_created"],
+         config["engine"]["engine_url"]]]
+
+    with open('metadata.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerows(metadata)
 
     test(config, g)
