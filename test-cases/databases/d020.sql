@@ -1,8 +1,5 @@
 DROP TABLE IF EXISTS Student cascade;
-CREATE TABLE Student (
-Name VARCHAR(50)
-);
-
+CREATE TABLE Student (Name VARCHAR(50));
 INSERT INTO Student (Name) VALUES ('http://example.com/company/Alice');
 INSERT INTO Student (Name) VALUES ('Bob');
 INSERT INTO Student (Name) VALUES ('Bob/Charles');

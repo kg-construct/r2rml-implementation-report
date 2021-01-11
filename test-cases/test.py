@@ -70,21 +70,25 @@ def database_down():
 
 def database_load(database_script):
     print("Loading in " + config["properties"]["database_system"] + " system the file:" + database_script)
-    with open('databases/' + database_script) as f:
-        contents = f.read()
 
     if database_system == "mysql":
         cnx = mysql.connector.connect(user='r2rml', password='r2rml', host='127.0.0.1', database='r2rml')
         cursor = cnx.cursor()
-        cursor.execute(contents, multi=True)
+        for statement in open('databases/' + database_script):
+            cursor.execute(statement)
+        cnx.commit()
+        cursor.close()
         cnx.close()
 
     elif database_system == "postgresql":
-        if "VARBINARY(200)" in contents:
-            contents = contents.replace("VARBINARY(200)", "BYTEA").replace("X'", "'\\\\x")
         cnx = psycopg2.connect("dbname='r2rml' user='r2rml' host='localhost' password='r2rml'")
         cursor = cnx.cursor()
-        cursor.execute(contents)
+        if database_script == "d016.sql":
+            database_script = "d016-postgresql.sql"
+        for statement in open('databases/' + database_script):
+            cursor.execute(statement)
+        cnx.commit()
+        cursor.close()
         cnx.commit()
         cnx.close()
 
