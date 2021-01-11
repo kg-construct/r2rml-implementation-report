@@ -1,3 +1,12 @@
+DROP TABLE IF EXISTS Student_Sport cascade;
+CREATE TABLE Student_Sport (
+ID_Student integer,
+ID_Sport integer,
+PRIMARY KEY (ID_Student,ID_Sport),
+FOREIGN KEY (ID_Student) REFERENCES Student(ID),
+FOREIGN KEY (ID_Sport) REFERENCES Sport(ID)
+);
+
 DROP TABLE IF EXISTS Student cascade;
 CREATE TABLE Student (
 ID integer PRIMARY KEY,
@@ -11,14 +20,6 @@ ID integer PRIMARY KEY,
 Description varchar(50)
 );
 
-DROP TABLE IF EXISTS Student_Sport cascade;
-CREATE TABLE Student_Sport (
-ID_Student integer,
-ID_Sport integer,
-PRIMARY KEY (ID_Student,ID_Sport),
-FOREIGN KEY (ID_Student) REFERENCES Student(ID),
-FOREIGN KEY (ID_Sport) REFERENCES Sport(ID)
-);
 
 INSERT INTO Student (ID,FirstName,LastName) VALUES (10,'Venus', 'Williams');
 INSERT INTO Student (ID,FirstName,LastName) VALUES (11,'Fernando', 'Alonso');
