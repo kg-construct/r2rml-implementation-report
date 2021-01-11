@@ -36,7 +36,6 @@ def test(config, g):
             cnx = mysql.connector.connect(user='r2rml', password='r2rml', host='127.0.0.1', database='r2rml')
             cursor = cnx.cursor()
             cursor.execute(contents, multi=True)
-            cnx.commit()
             cnx.close()
 
         elif database_system == "postgresql":

@@ -30,8 +30,12 @@ Connection properties for any RDBMS are: `database = r2rml, user = r2rml, passwo
 Example of the config file:
 ```
 [metadata]
-tester: https://dchaves.oeg-upm.net/ # URL of the tester 
-engine: https://morph.oeg.fi.upm.es/tool/morph-rdb # URL of the engine (e.g., GitHub repo)
+tester_name: David Chaves # name of the tester
+tester_url: https://dchaves.oeg-upm.net/ # URL of the tester 
+test_date: 07-01-2021 #testing data DD-MM-YYYY
+engine_name: Morph-RDB # name of the engine
+engine_url: https://morph.oeg.fi.upm.es/tool/morph-rdb # URL of the engine (e.g., GitHub repo)
+engine_version: 3.12.5 # version of the engine
 
 [properties]
 database_system: [mysql|postgresql]
