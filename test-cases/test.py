@@ -13,8 +13,12 @@ def test(config, g):
     print("Deployment docker container for " + database_system + "...")
 
     if database_system == "mysql":
+        os.system("docker-compose -f databases/docker-compose-mysql.yml stop")
+        os.system("docker-compose -f databases/docker-compose-mysql.yml rm --force")
         os.system("docker-compose -f databases/docker-compose-mysql.yml up -d && sleep 30")
     elif database_system == "postgresql":
+        os.system("docker-compose -f databases/docker-compose-postgresql.yml stop")
+        os.system("docker-compose -f databases/docker-compose-postgresql.yml rm --force")
         os.system("docker-compose -f databases/docker-compose-postgresql.yml up -d && sleep 30")
     else:
         print("Database system declared in config file must be mysql or postgresql")

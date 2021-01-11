@@ -29,13 +29,18 @@ Connection properties for any RDBMS are: `database = r2rml, user = r2rml, passwo
 
 Example of the config file:
 ```
-[metadata]
-tester_name: David Chaves # name of the tester
-tester_url: https://dchaves.oeg-upm.net/ # URL of the tester 
-test_date: 07-01-2021 #testing data DD-MM-YYYY
-engine_name: Morph-RDB # name of the engine
+[tester]
+tester_name: David Chaves # tester name
+tester_url: https://dchaves.oeg-upm.net/ # tester homepage
+tester_contact: dchaves@fi.upm.es # tester contact
+
+[engine]
+test_date: 2021-01-07 # engine test-date 
+engine_version: 3.12.5 # engine version
+engine_name: Morph-RDB # engine name
+engine_created: 2013-12-01 # engine date created (YYYY-MM-DD)
 engine_url: https://morph.oeg.fi.upm.es/tool/morph-rdb # URL of the engine (e.g., GitHub repo)
-engine_version: 3.12.5 # version of the engine
+
 
 [properties]
 database_system: [mysql|postgresql]
@@ -44,7 +49,7 @@ output_format: ntriples # output format of the results from your engine
 engine_command: java -jar morph-rdb.jar -p properties.properties # command to run your engine
 ```
 
-6. Install the requirements of the script `python3 -m pip install requirements.txt`
+6. Install the requirements of the script `python3 -m pip install -r requirements.txt`
 7. Run the script `python3 test.py config.ini`
 8. Your results will appear in `test-cases/results.ttl` in RDF and in `test-cases/results.csv` in CSV.
 
