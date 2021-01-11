@@ -12,6 +12,7 @@ mappings:
     s:
     po:
       - [a, [earl:Software,earl:TestSubject]]
+      - [dct:hasPart, $(database)~iri]
       - [dct:date, $(test_date), xsd:date]
       - [doap:name, $(engine_name)]
       - [doap:created, $(engine_created), xsd:date]
