@@ -35,7 +35,6 @@ def test_all():
             print("Testing R2RML test-case: " + t_identifier + " (" + t_title + ")")
             print("Purpose of this test is: " + purpose)
             result = run_test(t_identifier, r2rml, test_uri, expected_output)
-            result = "passed"
             results.append([config["tester"]["tester_url"], config["engine"]["engine_url"], t_identifier, result])
             print(t_identifier + "," + result)
 
