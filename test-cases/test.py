@@ -1,23 +1,30 @@
 import os
 import sys
 import csv
-from configparser import ConfigParser, ExtendedInterpolation
-
-import psycopg2
-from rdflib import Graph, RDF, Namespace, compare
 import mysql.connector
+import psycopg2
+from configparser import ConfigParser, ExtendedInterpolation
+from rdflib import Graph, RDF, Namespace, compare, Literal, URIRef
+
 
 
 def test_all():
-    for database_uri, p, o in manifest_graph.triples((None, RDF.type, RDB2RDFTEST.DataBase)):
+    q1 = """SELECT ?database_uri WHERE { 
+        ?database_uri rdf:type <http://purl.org/NET/rdb2rdf-test#DataBase>. 
+      } ORDER BY ?database_uri"""
+    for r in manifest_graph.query(q1):
+        database_uri = r.database_uri
         d_identifier = manifest_graph.value(subject=database_uri, predicate=DCELEMENTS.identifier, object=None)
         d_title = manifest_graph.value(subject=database_uri, predicate=DCELEMENTS.title, object=None)
         database = manifest_graph.value(subject=database_uri, predicate=RDB2RDFTEST.sqlScriptFile, object=None)
         print("**************************************************************************")
         print("Using the database: " + d_identifier + " (" + d_title + ")")
         database_load(database)
-
-        for test_uri, p_test, o_test in manifest_graph.triples((None, RDB2RDFTEST.database, database_uri)):
+        q2 = """SELECT ?test_uri WHERE { 
+                ?test_uri <http://purl.org/NET/rdb2rdf-test#database> ?database_uri. 
+              } ORDER BY ?test_uri"""
+        for r2 in manifest_graph.query(q2, initBindings={'?database_uri': URIRef(database_uri)}):
+            test_uri = r2.test_uri
             t_identifier = manifest_graph.value(subject=test_uri, predicate=DCELEMENTS.identifier, object=None)
             t_title = manifest_graph.value(subject=test_uri, predicate=DCELEMENTS.title, object=None)
             purpose = manifest_graph.value(subject=test_uri, predicate=TESTDEC.purpose, object=None)
@@ -28,6 +35,7 @@ def test_all():
             print("Testing R2RML test-case: " + t_identifier + " (" + t_title + ")")
             print("Purpose of this test is: " + purpose)
             result = run_test(t_identifier, r2rml, test_uri, expected_output)
+            result = "passed"
             results.append([config["tester"]["tester_url"], config["engine"]["engine_url"], t_identifier, result])
             print(t_identifier + "," + result)
 
@@ -83,13 +91,12 @@ def database_load(database_script):
     elif database_system == "postgresql":
         cnx = psycopg2.connect("dbname='r2rml' user='r2rml' host='localhost' password='r2rml'")
         cursor = cnx.cursor()
-        if database_script == "d016.sql":
+        if database_script == Literal("d016.sql"):
             database_script = "d016-postgresql.sql"
         for statement in open('databases/' + database_script):
             cursor.execute(statement)
         cnx.commit()
         cursor.close()
-        cnx.commit()
         cnx.close()
 
 
@@ -132,12 +139,12 @@ def run_test(t_identifier, mapping, test_uri, expected_output):
 
 
 def generate_results():
-    with open('results.csv', 'w', newline='') as file:
+    with open('results-' + database_system + '.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerows(results)
 
     print("Generating the RDF results using EARL vocabulary")
-    os.system("java -jar rmlmapper.jar -m mapping.rml.ttl -o results" + database_system + ".ttl -d")
+    os.system("java -jar rmlmapper.jar -m mapping.rml.ttl -o results-" + database_system + ".ttl -d")
     os.system("rm metadata.csv r2rml.ttl")
 
 

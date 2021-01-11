@@ -4,4 +4,3 @@ INSERT INTO Country (Code, Name, Lan) VALUES ('BO', 'Bolivia, Plurinational Stat
 INSERT INTO Country (Code, Name, Lan) VALUES ('BO', 'Estado Plurinacional de Bolivia', 'ES');
 INSERT INTO Country (Code, Name, Lan) VALUES ('IE', 'Ireland', 'EN');
 INSERT INTO Country (Code, Name, Lan) VALUES ('IE', 'Irlanda', 'ES');
-
