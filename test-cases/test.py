@@ -7,7 +7,6 @@ from configparser import ConfigParser, ExtendedInterpolation
 from rdflib import Graph, RDF, Namespace, compare, Literal, URIRef
 
 
-
 def test_all():
     q1 = """SELECT ?database_uri WHERE { 
         ?database_uri rdf:type <http://purl.org/NET/rdb2rdf-test#DataBase>. 
@@ -112,17 +111,25 @@ def run_test(t_identifier, mapping, test_uri, expected_output):
     # if there is output file
     if os.path.isfile(config["properties"]["output_results"]):
         # and expected output is true
-        os.system("cp "+config["properties"]["output_results"] + " " + t_identifier + "/engine_output.ttl")
+        os.system("cp " + config["properties"]["output_results"] + " " + t_identifier + "/engine_output.ttl")
         if expected_output:
             output_graph = Graph()
-            output_graph.parse(config["properties"]["output_results"],
-                               format=config["properties"]["output_format"])
+
             # and graphs are equal
-            if compare.isomorphic(expected_output_graph, output_graph):
-                result = passed
-            # and graphs are distinct
-            else:
+            iso_expected = compare.to_isomorphic(expected_output_graph)
+            try:
+                # if the output is not a valid rdf graph
+                output_graph.parse(config["properties"]["output_results"],
+                                   format=config["properties"]["output_format"])
+                iso_output = compare.to_isomorphic(output_graph)
+                if iso_expected == iso_output:
+                    result = passed
+                # and graphs are distinct
+                else:
+                    result = failed
+            except:
                 result = failed
+
         # and expected output is false
         else:
             result = failed
