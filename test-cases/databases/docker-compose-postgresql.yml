@@ -4,8 +4,6 @@ services:
     container_name: r2rmltc-postgres
     image: postgres:13
     restart: always
-    volumes:
-      - ./:/data
     environment:
       POSTGRES_PASSWORD: r2rml
       POSTGRES_USER: r2rml

@@ -4,8 +4,6 @@ services:
     container_name: r2rmltc-mysql
     image: mysql:8.0
     restart: always
-    volumes:
-      - .:/data
     environment:
       MYSQL_ROOT_PASSWORD: r2rml
       MYSQL_USER: r2rml
