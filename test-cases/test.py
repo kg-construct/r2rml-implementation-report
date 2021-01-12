@@ -107,17 +107,18 @@ def run_test(t_identifier, mapping, test_uri, expected_output):
         output = manifest_graph.value(subject=test_uri, predicate=RDB2RDFTEST.output, object=None)
         expected_output_graph.parse("./" + t_identifier + "/" + output, format="nquads")
 
-    os.system(config["properties"]["engine_command"])
+    os.system(config["properties"]["engine_command"] + " > " + t_identifier + "/engine_output.log")
 
     # if there is output file
     if os.path.isfile(config["properties"]["output_results"]):
         # and expected output is true
+        os.system("cp "+config["properties"]["output_results"] + " " + t_identifier + "/engine_output.ttl")
         if expected_output:
             output_graph = Graph()
             output_graph.parse(config["properties"]["output_results"],
                                format=config["properties"]["output_format"])
             # and graphs are equal
-            if compare.isomorphic(expected_output_graph, expected_output):
+            if compare.isomorphic(expected_output_graph, output_graph):
                 result = passed
             # and graphs are distinct
             else:
