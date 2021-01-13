@@ -39,7 +39,7 @@ def test_all():
 
 
 def test_one(identifier):
-    test_uri = manifest_graph.value(subject=None, predicate=DCELEMENTS.identifier, object=identifier)
+    test_uri = manifest_graph.value(subject=None, predicate=DCELEMENTS.identifier, object=Literal(identifier))
     t_title = manifest_graph.value(subject=test_uri, predicate=DCELEMENTS.title, object=None)
     purpose = manifest_graph.value(subject=test_uri, predicate=TESTDEC.purpose, object=None)
     expected_output = bool(manifest_graph.value(subject=test_uri, predicate=RDB2RDFTEST.hasExpectedOutput, object=None))
