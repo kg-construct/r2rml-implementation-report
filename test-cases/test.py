@@ -110,23 +110,23 @@ def run_test(t_identifier, mapping, test_uri, expected_output):
 
     # if there is output file
     if os.path.isfile(config["properties"]["output_results"]):
-        # and expected output is true
         os.system("cp " + config["properties"]["output_results"] + " " + t_identifier + "/engine_output-"+database_system+".ttl")
+        # and expected output is true
         if expected_output:
             output_graph = Graph()
-
-            # and graphs are equal
             iso_expected = compare.to_isomorphic(expected_output_graph)
+            # trying to parse the output (e.g., not valid RDF)
             try:
-                # if the output is not a valid rdf graph
                 output_graph.parse(config["properties"]["output_results"],
                                    format=config["properties"]["output_format"])
                 iso_output = compare.to_isomorphic(output_graph)
+                # and graphs are equal
                 if iso_expected == iso_output:
                     result = passed
                 # and graphs are distinct
                 else:
                     result = failed
+            # output is not valid RDF
             except:
                 result = failed
 
