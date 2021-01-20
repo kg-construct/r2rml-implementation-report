@@ -1,7 +1,6 @@
 # R2RML Implementation report
 
-Test the capabilities of your R2RML engine with the [R2RML test cases](https://www.w3.org/2001/sw/rdb2rdf/test-cases/).
-Use the resources provided in this repository to automatically generate an EARL report with your results.
+Test the capabilities of your R2RML engine with the [R2RML test cases](https://www.w3.org/2001/sw/rdb2rdf/test-cases/). Use the resources provided in this repository to automatically generate an EARL report with your results. Following the configuration steps to include your results in the R2RML implementation report (link available soon).
 
 
 ## Requirements for running the implementation report:
@@ -11,12 +10,26 @@ Use the resources provided in this repository to automatically generate an EARL 
 - Python
 - Java
 
-## RDBMS coverage:
+## RDBMS coverage and properties info:
 
-- MySQL (port = 3306)
-- PostgreSQL (port = 5432)
+- MySQL (`port = 3306`)
+- PostgreSQL (`port = 5432`)
 
 Connection properties for any RDBMS are: `database = r2rml, user = r2rml, password = r2rml`
+Mapping path is invariable, it is always `test-cases/r2rml.ttl`
+
+
+## Steps to include your results in the R2RML implementation report website:
+
+We follow a decentralized approach to query and obtain the results for the R2RML parsers that want to include their results in the R2RML implementation report website. More in detail, we use [Walder](https://github.com/KNowledgeOnWebScale/walder) to generate the website, querying the EARL reports provide by any R2RML-parser developer. The steps to include your results in the implementation report are:
+
+1. Have an access point for your results (it could be a LDF server, RDF dump, SPARQL endpoint, etc.). As the reports are not very heavy, the easiest way to provide the results could be an RDF dump uploaded to GitHub repository (e.g., https://raw.githubusercontent.com/[YOUR-USER]/[YOUR-REPO]/main/test-cases/results.ttl). We explain how to generate the R2RML test-cases report in the next section.
+2. Fork this repository.
+3. Add the access point in the [WALDER config file](https://github.com/kg-construct/r2rml-implementation-report/blob/main/website/config.yaml#L10).
+4. Make a pull request to include the results in the website.
+
+![Configuration setp](misc/configuration-step.png?raw=true "Configuration setp")
+
 
 ## Steps to include your report:
 
