@@ -28,7 +28,7 @@ We follow a decentralized approach to query and obtain the results for the R2RML
 3. Add the access point in the [WALDER config file](https://github.com/kg-construct/r2rml-implementation-report/blob/main/website/config.yaml#L10).
 4. Make a pull request to include the results in the website.
 
-![Configuration setp](misc/configuration-step.png?raw=true "Configuration setp")
+![Configuration setp](misc/config.png?raw=true "Configuration setp")
 
 
 ## Steps to include your report:
