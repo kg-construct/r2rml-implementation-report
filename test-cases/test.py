@@ -98,6 +98,8 @@ def database_load(database_script):
 def run_test(t_identifier, mapping, test_uri, expected_output):
     os.system("cp " + t_identifier + "/" + mapping + " r2rml.ttl")
     expected_output_graph = Graph()
+    if os.path.isfile(config["properties"]["output_results"]):
+        os.system("rm "+config["properties"]["output_results"])
 
     if expected_output:
         output = manifest_graph.value(subject=test_uri, predicate=RDB2RDFTEST.output, object=None)
