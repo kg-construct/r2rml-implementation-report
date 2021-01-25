@@ -155,7 +155,7 @@
     rdfs:label "metadata".
 :s_002 a rr:SubjectMap.
 :map_metadata_000 rr:subjectMap :s_002.
-:s_002 rr:template "http://kg-construct.github.io/r2rml-implementation-report/Assertion/{tester}-{platform}-{database}".
+:s_002 rr:template "http://kg-construct.github.io/r2rml-implementation-report/Assertion/{tester}-{platform}-{rdbms}".
 :pom_011 a rr:PredicateObjectMap.
 :map_metadata_000 rr:predicateObjectMap :pom_011.
 :pm_011 a rr:PredicateMap.
@@ -210,7 +210,7 @@
     rdfs:label "results".
 :s_003 a rr:SubjectMap.
 :map_results_000 rr:subjectMap :s_003.
-:s_003 rr:template "http://kg-construct.github.io/r2rml-implementation-report/TestResult/{tester}-{platform}-{database}-{result}".
+:s_003 rr:template "http://kg-construct.github.io/r2rml-implementation-report/TestResult/{tester}-{platform}-{rdbms}-{testid}".
 :pom_017 a rr:PredicateObjectMap.
 :map_results_000 rr:predicateObjectMap :pom_017.
 :pm_017 a rr:PredicateMap.

@@ -32,13 +32,13 @@ mappings:
   metadata:
     sources:
         - ['results.csv~csv']
-    s: http://kg-construct.github.io/r2rml-implementation-report/Assertion/$(tester)-$(platform)-$(database)
+    s: http://kg-construct.github.io/r2rml-implementation-report/Assertion/$(tester)-$(platform)-$(rdbms)
     po:
       - [a, earl:Assertion]
       - [earl:mode, earl:automatic~iri]
       - [earl:test, http://www.w3.org/2001/sw/rdb2rdf/test-cases/#$(testid)~iri]
       - p: earl:assertedBy
-        o: 
+        o:
           - mapping: tester
             condition:
               function: equal
@@ -64,7 +64,7 @@ mappings:
   results:
     sources:
         - ['results.csv~csv']
-    s: http://kg-construct.github.io/r2rml-implementation-report/TestResult/$(tester)-$(platform)-$(database)-$(result)
+    s: http://kg-construct.github.io/r2rml-implementation-report/TestResult/$(tester)-$(platform)-$(rdbms)-$(testid)
     po:
       - [a, earl:TestResult]
       - [earl:outcome, http://www.w3.org/ns/earl#$(result)~iri]
