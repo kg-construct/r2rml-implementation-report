@@ -162,6 +162,14 @@ def merge_results():
         final_results.parse("results-mysql.ttl", format="ntriples")
         final_results.parse("results-postgresql.ttl", format="ntriples")
         final_results.serialize("results.ttl", format="ntriples")
+    elif os.path.isfile("results-mysql.ttl"):
+        final_results = Graph()
+        final_results.parse("results-mysql.ttl", format="ntriples")
+        final_results.serialize("results.ttl", format="ntriples")
+    elif os.path.isfile("results-postgresql.ttl"):
+        final_results = Graph()
+        final_results.parse("results-postgresql.ttl", format="ntriples")
+        final_results.serialize("results.ttl", format="ntriples")
 
 def get_database_url():
     if database_system == "mysql":
