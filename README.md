@@ -1,6 +1,6 @@
 # R2RML Implementation report
 
-Test the capabilities of your R2RML engine with the [R2RML test cases](https://www.w3.org/2001/sw/rdb2rdf/test-cases/). Use the resources provided in this repository to automatically generate an EARL report with your results. Following the configuration steps to include your results in the R2RML implementation report (link available soon).
+Test the capabilities of your R2RML engine with the [R2RML test cases](https://www.w3.org/2001/sw/rdb2rdf/test-cases/). Use the resources provided in this repository to automatically generate an EARL report with your results. Following the configuration steps to include your results in the [R2RML implementation report ](https://kg-construct.github.io/r2rml-implementation-report/).
 
 
 ## Requirements for running the implementation report:
