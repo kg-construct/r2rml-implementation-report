@@ -10,7 +10,7 @@
 	rr:logicalTable [ rr:tableName  "\"IOUs\"" ]; 
 	
     rr:subjectMap [
-            rr:template "{\"fname\"}_{\"lname\"}"; 
+            rr:template "{\"fname\"}{\"lname\"}"; 
             rr:termType rr:BlankNode ;
       ];
 	
@@ -29,7 +29,7 @@
 	rr:logicalTable [ rr:tableName  "\"Lives\"" ]; 
 
     rr:subjectMap [
-            rr:template "{\"fname\"}_{\"lname\"}"; 
+            rr:template "{\"fname\"}{\"lname\"}"; 
             rr:termType rr:BlankNode;
       ];
 	
