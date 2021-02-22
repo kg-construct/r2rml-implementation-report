@@ -185,19 +185,7 @@
 	dcterms:title "One table, three columns, one row, no primary key" ;
 	dcterms:identifier "D003-1table3columns1row" ;
 	rdb2rdftest:sqlScriptFile "d003.sql";
-	rdb2rdftest:relatedTestCase <tc0003a>, <tc0003b>, <tc0003c> ;
-.
-
-<tc0003a> a rdb2rdftest:R2RML ;	
-	dcterms:title "Three columns mapping, undefined SQL Version identifier" ; 
-	dcterms:identifier "R2RMLTC0003a" ;
-	test:purpose "Tests the presence of an undefined SQL Version identifier" ;
-	test:specificationReference "#dfn-sql-version-identifier" ;
-	test:reviewStatus test:unreviewed ;
-	rdb2rdftest:database <d003> ;
-	rdb2rdftest:hasExpectedOutput false ;	
-	rdb2rdftest:failMessage "non-conforming R2RML mapping";
-	rdb2rdftest:mappingDocument "r2rmla.ttl" ;
+	rdb2rdftest:relatedTestCase <tc0003b>, <tc0003c> ;
 .
 
 <tc0003b> a rdb2rdftest:R2RML ;	
