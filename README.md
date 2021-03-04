@@ -6,7 +6,7 @@ Test the capabilities of your R2RML engine with the [R2RML test cases](https://w
 - This repository does NOT include any engine report
 - The implementation report follows a decentralized approach, developers only have to provide (via PR) a link to their EARL reports
 - The support resources provided here (test-cases folder) to generate the reports can be: forked, downloaded or cloned but no PR with the report is needed
-- Read carefully the documentation provided and open and issue if you have any question or doubt.
+- Read carefully the documentation provided, and open an issue if you have any question or doubt.
 
 ## Requirements for running the implementation report:
 
