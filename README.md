@@ -2,6 +2,11 @@
 
 Test the capabilities of your R2RML engine with the [R2RML test cases](https://www.w3.org/2001/sw/rdb2rdf/test-cases/). Use the resources provided in this repository to automatically generate an EARL report with your results. Following the configuration steps to include your results in the [R2RML implementation report ](https://kg-construct.github.io/r2rml-implementation-report/).
 
+**IMPORTANT INFORMATION ABOUT THE R2RML IMPLEMENTATION REPORT:** 
+- This repository does NOT include any engine report
+- The implementation report follows a decentralized approach, developers only have to provide (via PR) a link to their EARL reports
+- The support resources provided here (test-cases folder) to generate the reports can be: forked, downloaded or cloned but no PR with the report is needed
+- Read carefully the documentation provided, and open an issue if you have any question or doubt.
 
 ## Requirements for running the implementation report:
 
@@ -26,7 +31,7 @@ We follow a decentralized approach to query and obtain the results for the R2RML
 
 1. Have an access point for your results (it could be a LDF server, RDF dump, SPARQL endpoint, etc.). As the reports are not very heavy, the easiest way to provide the results could be an RDF dump uploaded to GitHub repository (e.g., https://raw.githubusercontent.com/[YOUR-USER]/[YOUR-REPO]/main/test-cases/results.ttl). We explain how to generate the R2RML test-cases report in the next section.
 2. Fork this repository.
-3. Add the access point in the [WALDER config file](https://github.com/kg-construct/r2rml-implementation-report/blob/main/website/config.yaml#L10).
+3. Add the access point in the [WALDER config file](https://github.com/kg-construct/r2rml-implementation-report/blob/main/docs/config.yaml#L10).
 4. Make a pull request to include the results in the website.
 
 Overview of the configuration steps:
@@ -35,9 +40,9 @@ Overview of the configuration steps:
 
 ## Steps to generate the results from the R2RML test-cases:
 
-1. Clone or download this repository.
-2. To include the R2RML test cases for the support of the development of your R2RML parser you can:
-	-  Copy the complete test-cases folder into your repository (e.g., in a testing folder in the master branch or in a new testing branch).
+1. Fork, clone or download this repository.
+2. Include the test-cases in your development, you can:
+	- Copy the complete test-cases folder into your engine repository (e.g., in a testing folder in the master branch or in a new testing branch).
 	- Include the executable file(s) of your engine inside the test-cases folder.
 3. Install the requirements of the script `python3 -m pip install -r test-cases/requirements.txt`
 4. Modify the test-cases/config.ini file with your information. For configurating your engine, remember that the path of the **mapping file is always test-cases/r2rml.ttl**. For example:
