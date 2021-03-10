@@ -29,29 +29,14 @@ mappings:
       - [foaf:mbox, $(tester_contact)]
       - [foaf:homepage, $(tester_url)~iri]
 
-  testcase:
-    sources:
-      - ['results.csv~csv']
-    s: http://www.w3.org/2001/sw/rdb2rdf/test-cases/#$(testid)~iri
-    po:
-      - [ a, earl:TestCase ]
-      - [ dcterms:identifier,  $(test_id) ]
-
   metadata:
     sources:
       - ['results.csv~csv']
-    s: http://kg-construct.github.io/r2rml-implementation-report/Assertion/$(tester)-$(platform)-$(rdbms)
+    s: http://kg-construct.github.io/r2rml-implementation-report/Assertion/$(tester)-$(platform)-$(rdbms)-$(testid)
     po:
       - [a, earl:Assertion]
       - [earl:mode, earl:automatic~iri]
-      - p: earl:test
-        o:
-          - mapping: testcase
-            condition:
-              function: equal
-              parameters:
-                - [ str1, $(testid) ]
-                - [ str2, $(testid) ]
+      - [earl:test, http://www.w3.org/2001/sw/rdb2rdf/test-cases/#$(testid)~iri]
       - p: earl:assertedBy
         o:
           - mapping: tester
@@ -79,7 +64,7 @@ mappings:
   results:
     sources:
       - ['results.csv~csv']
-    s: http://kg-construct.github.io/r2rml-implementation-report/TestResult/$(tester)-$(platform)-$(rdbms)-$(testid)
+    s: http://kg-construct.github.io/r2rml-implementation-report/TestResult/$(tester)-$(platform)-$(rdbms)-$(testid)-$(result)
     po:
       - [a, earl:TestResult]
       - [earl:outcome, http://www.w3.org/ns/earl#$(result)~iri]
