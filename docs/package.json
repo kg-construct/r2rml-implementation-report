@@ -10,6 +10,7 @@
   "author": "Pieter Heyvaert (https://pieterheyvaet.com)",
   "license": "MIT",
   "dependencies": {
+    "nunjucks": "^3.2.3",
     "tinyliquid": "^0.2.34",
     "walder": "github:KNowledgeOnWebScale/walder"
   }

@@ -5,7 +5,7 @@ info:
 x-walder-resources:
   root: ./
   views: views
-  pipe-modules: pipeModules
+  pipe-modules: pipe-modules
   public: public
 x-walder-datasources:
   - https://raw.githubusercontent.com/jatoledo/r2rml-implementation-report/main/test-cases/results.ttl
@@ -15,29 +15,38 @@ paths:
     get:
       summary: Return report
       x-walder-query:
-        graphql-query: >
-          {
-            id @single
-            type(_:Assertion)
-            test @single {
-              identifier @single
-              title @single
-            }
-            result @single {
-              outcome @single
-            }
-            processor @single {
+        graphql-query:
+          processors: >
+            {
+              type(_:Software)
+              id @single
               name @single
               version @single
             }
-          }
+          testCases: >
+            {
+              id @single
+              type(_:TestCase)
+              identifier @single
+              title @single
+              assertions {
+                result @single {
+                  outcome @single
+                }
+                processor @single
+              }
+            }
         json-ld-context: >
           {
             "earl": "http://www.w3.org/ns/earl#",
             "dcterms": "http://purl.org/dc/elements/1.1/",
             "doap": "http://usefulinc.com/ns/doap#",
+            "rdb2rdftest": "http://purl.org/NET/rdb2rdf-test#",
             "Assertion": "earl:Assertion",
+            "Software": "earl:Software",
+            "TestCase": "rdb2rdftest:R2RML",
             "test": "earl:test",
+            "assertions": { "@reverse": "earl:test"},
             "result": "earl:result",
             "outcome": "earl:outcome",
             "processor": "earl:subject",
@@ -47,7 +56,10 @@ paths:
             "version": "doap:release",
             "type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
           }
+      x-walder-postprocessing:
+        processAssertions:
+          source: utils.js
       responses:
         200:
           description: R2RML implementation report
-          x-walder-input-text/html: index.liquid
+          x-walder-input-text/html: index.nunjucks

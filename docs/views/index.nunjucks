@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>R2RML Implementation Report</title>
+
+  <link rel="stylesheet" href="/css/result-table.css">
+
   <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
   <script class="remove">
    // All config options at https://respec.org/docs/
@@ -54,15 +57,24 @@
 
     <table>
         <tbody>
-        {% for assertion in data %}
-            <tr><td>{{ assertion.test.identifier }}</td><td>{{ assertion.processor.name }} (v{{ assertion.processor.version }})</td>
-            <td>
-                {% if assertion.result.outcome == "http://www.w3.org/ns/earl#passed" %}
-                    passed
-                {% else %}
-                    failed
-                {% endif %}
-            </td>
+        <tr>
+            <th>Test Case</th>
+            {% for processor in processors %}
+                <th><a href="{{ processor.website }}">{{ processor.name }}</a></th>
+            {% endfor %}
+        </tr>
+
+        {% for testCase in testCases %}
+            <tr>
+                <td><a href="{{ testCase.id }}">{{ testCase.identifier }}</a></td>
+                {% for processor in processors %}
+                    {% if testCase.assertions[processor.id] == "http://www.w3.org/ns/earl#passed" %}
+                        <td class="passed result"><a href="http://www.w3.org/ns/earl#passed">passed</a></td>
+                    {% else %}
+                        <td class="failed result"><a href="http://www.w3.org/ns/earl#failed">failed</a></td>
+                    {% endif %}
+                    </td>
+                {% endfor %}
             </tr>
         {% endfor %}
         </tbody>
