@@ -9,6 +9,7 @@ x-walder-resources:
   public: public
 x-walder-datasources:
   - https://raw.githubusercontent.com/jatoledo/r2rml-implementation-report/main/test-cases/results.ttl
+  - http://localhost:8080/results-ontop.ttl
   - https://raw.githubusercontent.com/kg-construct/r2rml-implementation-report/main/test-cases/manifest.ttl # Descriptions of the test cases
 paths:
   /:
