@@ -66,7 +66,7 @@
 :pm_003 rr:constant doap:name.
 :pom_003 rr:objectMap :om_004.
 :om_004 a rr:ObjectMap;
-    rml:reference "engine_name";
+    rr:template "{engine_name}-{database_name}";
     rr:termType rr:Literal.
 :pom_004 a rr:PredicateObjectMap.
 :map_engine_000 rr:predicateObjectMap :pom_004.

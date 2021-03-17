@@ -14,7 +14,7 @@ mappings:
       - [a, [earl:Software,earl:TestSubject]]
       - [dct:hasPart, $(database)~iri]
       - [dct:date, $(test_date), xsd:date]
-      - [doap:name, $(engine_name)]
+      - [doap:name, $(engine_name)-$(database_name)]
       - [doap:created, $(engine_created), xsd:date]
       - [doap:homepage, $(engine_url)~iri]
       - [doap:release, $(engine_version)]
