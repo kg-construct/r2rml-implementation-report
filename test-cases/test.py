@@ -147,7 +147,7 @@ def run_test(t_identifier, mapping, test_uri, expected_output):
             result = passed
 
     results.append(
-        [config["tester"]["tester_name"], config["engine"]["engine_name"], database_system, t_identifier, result])
+        [config["tester"]["tester_name"], config["engine"]["engine_name"], get_database_name(), t_identifier, result])
     print(t_identifier + "," + result)
 
 
@@ -187,6 +187,16 @@ def get_database_url():
         sys.exit()
 
 
+def get_database_name():
+    if database_system == "mysql":
+        return "MySQL"
+    elif database_system == "postgresql":
+        return "PostgreSQL"
+    else:
+        print("Database system declared in config file must be mysql or postgresql")
+        sys.exit()
+
+
 if __name__ == "__main__":
     config_file = str(sys.argv[1])
     if not os.path.isfile(config_file):
@@ -211,7 +221,7 @@ if __name__ == "__main__":
         [config["tester"]["tester_name"], config["tester"]["tester_url"], config["tester"]["tester_contact"],
          config["engine"]["test_date"],
          config["engine"]["engine_version"], config["engine"]["engine_name"], config["engine"]["engine_created"],
-         config["engine"]["engine_url"], get_database_url(), database_system]]
+         config["engine"]["engine_url"], get_database_url(), get_database_name()]]
     failed = "failed"
     passed = "passed"
     with open('metadata.csv', 'w', newline='') as file:
