@@ -23,6 +23,8 @@ paths:
               id @single
               name @single
               version @single
+              date @single
+              homepage @single
             }
           testCases: >
             {
@@ -35,6 +37,9 @@ paths:
                   outcome @single
                 }
                 processor @single
+                assertedBy @single {
+                  fullname @single
+                }
               }
             }
         json-ld-context: >
@@ -43,6 +48,7 @@ paths:
             "dcterms": "http://purl.org/dc/elements/1.1/",
             "doap": "http://usefulinc.com/ns/doap#",
             "rdb2rdftest": "http://purl.org/NET/rdb2rdf-test#",
+            "foaf": "http://xmlns.com/foaf/0.1/",
             "Assertion": "earl:Assertion",
             "Software": "earl:Software",
             "TestCase": "rdb2rdftest:R2RML",
@@ -55,10 +61,16 @@ paths:
             "title": "dcterms:title",
             "name": "doap:name",
             "version": "doap:release",
+            "assertedBy": "earl:assertedBy",
+            "fullname": "foaf:name",
+            "date": "doap:created",
+            "homepage": "doap:homepage",
             "type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
           }
       x-walder-postprocessing:
         processAssertions:
+          source: utils.js
+        formatDate:
           source: utils.js
       responses:
         200:

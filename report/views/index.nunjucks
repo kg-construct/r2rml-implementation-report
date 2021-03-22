@@ -52,6 +52,33 @@
     The goal of this report is to verify the R2RML specification is implementable.
 </section>
 
+<section id="r2rml-processor">
+    <h2>R2RML Processors</h2>
+    In the following the R2RML processors are listed that have been used in the R2RML Implementation report.
+
+    <table>
+        <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Version</th>
+            <th>Test date</th>
+{#            <th>Contact</th>#}
+            <th>Web page</th>
+        </tr>
+
+        {% for processor in processors %}
+        <tr>
+            <td>{{ processor.name }}</td>
+            <td>v{{ processor.version }}</td>
+            <td>{{ processor.date }}</td>
+{#            <td></td>#}
+            <td><a href="{{ processor.homepage }}">{{ processor.homepage }}</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+
 <section id="test-results">
     <h2>Implementation Test Results</h2>
 
