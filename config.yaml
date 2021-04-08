@@ -1,0 +1,78 @@
+openapi: 3.0.2
+info:
+  title: 'R2RML implementation report'
+  version: 0.1.0
+x-walder-resources:
+  root: ./
+  views: views
+  pipe-modules: pipe-modules
+  public: public
+x-walder-datasources:
+  - https://raw.githubusercontent.com/jatoledo/r2rml-implementation-report/main/test-cases/results.ttl
+  - http://localhost:8080/results-ontop.ttl
+  - https://raw.githubusercontent.com/kg-construct/r2rml-implementation-report/main/test-cases/manifest.ttl # Descriptions of the test cases
+paths:
+  /:
+    get:
+      summary: Return report
+      x-walder-query:
+        graphql-query:
+          processors: >
+            {
+              type(_:Software)
+              id @single
+              name @single
+              version @single
+              date @single
+              homepage @single
+            }
+          testCases: >
+            {
+              id @single
+              type(_:TestCase)
+              identifier @single
+              title @single
+              assertions {
+                result @single {
+                  outcome @single
+                }
+                processor @single
+                assertedBy @single {
+                  fullname @single
+                }
+              }
+            }
+        json-ld-context: >
+          {
+            "earl": "http://www.w3.org/ns/earl#",
+            "dcterms": "http://purl.org/dc/elements/1.1/",
+            "doap": "http://usefulinc.com/ns/doap#",
+            "rdb2rdftest": "http://purl.org/NET/rdb2rdf-test#",
+            "foaf": "http://xmlns.com/foaf/0.1/",
+            "Assertion": "earl:Assertion",
+            "Software": "earl:Software",
+            "TestCase": "rdb2rdftest:R2RML",
+            "test": "earl:test",
+            "assertions": { "@reverse": "earl:test"},
+            "result": "earl:result",
+            "outcome": "earl:outcome",
+            "processor": "earl:subject",
+            "identifier": "dcterms:identifier",
+            "title": "dcterms:title",
+            "name": "doap:name",
+            "version": "doap:release",
+            "assertedBy": "earl:assertedBy",
+            "fullname": "foaf:name",
+            "date": "doap:created",
+            "homepage": "doap:homepage",
+            "type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+          }
+      x-walder-postprocessing:
+        processAssertions:
+          source: utils.js
+        formatDate:
+          source: utils.js
+      responses:
+        200:
+          description: R2RML implementation report
+          x-walder-input-text/html: index.nunjucks

@@ -1,0 +1,20 @@
+td, th {
+    padding: 10px;
+}
+
+td.passed {
+    background-color: green;
+}
+
+td.failed {
+    background-color: red;
+}
+
+td.result {
+    text-align: center;
+    font-weight: bold;
+}
+
+td.result a {
+    color: white;
+}
