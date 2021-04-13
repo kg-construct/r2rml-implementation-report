@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>R2RML Implementation Report</title>
 
-  <link rel="stylesheet" href="/css/result-table.css">
+  <link rel="stylesheet" href="css/result-table.css">
 
   <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
   <script class="remove">
