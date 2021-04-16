@@ -1,59 +1,235 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>R2RML Implementation Report</title>
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="generator" content="ReSpec 26.5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        dfn{cursor:pointer}
+        .dfn-panel{position:absolute;z-index:35;min-width:300px;max-width:500px;padding:.5em .75em;margin-top:.6em;font:small Helvetica Neue,sans-serif,Droid Sans Fallback;background:#fff;color:#000;box-shadow:0 1em 3em -.4em rgba(0,0,0,.3),0 0 1px 1px rgba(0,0,0,.05);border-radius:2px}
+        .dfn-panel:not(.docked)>.caret{position:absolute;top:-9px}
+        .dfn-panel:not(.docked)>.caret::after,.dfn-panel:not(.docked)>.caret::before{content:"";position:absolute;border:10px solid transparent;border-top:0;border-bottom:10px solid #fff;top:0}
+        .dfn-panel:not(.docked)>.caret::before{border-bottom:9px solid #a2a9b1}
+        .dfn-panel *{margin:0}
+        .dfn-panel b{display:block;color:#000;margin-top:.25em}
+        .dfn-panel ul a[href]{color:#333}
+        .dfn-panel>div{display:flex}
+        .dfn-panel a.self-link{font-weight:700;margin-right:auto}
+        .dfn-panel .marker{padding:.1em;margin-left:.5em;border-radius:.2em;text-align:center;white-space:nowrap;font-size:90%;color:#040b1c}
+        .dfn-panel .marker.dfn-exported{background:#d1edfd;box-shadow:0 0 0 .125em #1ca5f940}
+        .dfn-panel .marker.idl-block{background:#8ccbf2;box-shadow:0 0 0 .125em #0670b161}
+        .dfn-panel a:not(:hover){text-decoration:none!important;border-bottom:none!important}
+        .dfn-panel a[href]:hover{border-bottom-width:1px}
+        .dfn-panel ul{padding:0}
+        .dfn-panel li{margin-left:1em}
+        .dfn-panel.docked{position:fixed;left:.5em;top:unset;bottom:2em;margin:0 auto;max-width:calc(100vw - .75em * 2 - .5em - .2em * 2);max-height:30vh;overflow:auto}
+    </style>
 
-  <link rel="stylesheet" href="css/result-table.css">
 
-  <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
-  <script class="remove">
-   // All config options at https://respec.org/docs/
-   var respecConfig = {
-      specStatus: "CG-DRAFT",
-      editors: [
-        {
-          "name": "David Chaves-Fraga",
-          "url": "https://dchaves.oeg-upm.net/",
-          "company": "Universidad Politécnica de Madrid",
-          "orcid": "0000-0003-3236-2789",
-          "companyURL": "https://upm.es/",
-        },{
-          "name":       "Pieter Heyvaert",
-          "url":        "https://pieterheyvaert.com/",
-          "company":    "Ghent University",
-          "companyURL": "https://www.ugent.be/",
-          "orcid": "0000-0002-1583-5719",
-        },
-      ],
-      github: "kg-construct/r2rml-implementation-report",
-      shortName: "r2rml-implementation-report",
-      group: "kg-construct",
-      /*xref: [""],
-      maxTocLevel: 2,*/
-    };
-  </script>
+    <title>R2RML Implementation Report</title>
 
-</head>
-<body>
-<section id='abstract'>
+
+    <link rel="stylesheet" href="css/result-table.css">
+
+
+
+
+
+    <style id="respec-mainstyle">
+        @keyframes pop{
+            0%{transform:scale(1,1)}
+            25%{transform:scale(1.25,1.25);opacity:.75}
+            100%{transform:scale(1,1)}
+        }
+        .hljs{background:0 0!important}
+        a abbr,h1 abbr,h2 abbr,h3 abbr,h4 abbr,h5 abbr,h6 abbr{border:none}
+        dfn{font-weight:700}
+        a.internalDFN{color:inherit;border-bottom:1px solid #99c;text-decoration:none}
+        a.externalDFN{color:inherit;border-bottom:1px dotted #ccc;text-decoration:none}
+        a.bibref{text-decoration:none}
+        .respec-offending-element:target{animation:pop .25s ease-in-out 0s 1}
+        .respec-offending-element,a[href].respec-offending-element{text-decoration:red wavy underline}
+        @supports not (text-decoration:red wavy underline){
+            .respec-offending-element:not(pre){display:inline-block}
+            .respec-offending-element{background:url(data:image/gif;base64,R0lGODdhBAADAPEAANv///8AAP///wAAACwAAAAABAADAEACBZQjmIAFADs=) bottom repeat-x}
+        }
+        #references :target{background:#eaf3ff;animation:pop .4s ease-in-out 0s 1}
+        cite .bibref{font-style:normal}
+        code{color:#c63501}
+        th code{color:inherit}
+        a[href].orcid{padding-left:4px;padding-right:4px}
+        a[href].orcid>svg{margin-bottom:-2px}
+        .toc a,.tof a{text-decoration:none}
+        a .figno,a .secno{color:#000}
+        ol.tof,ul.tof{list-style:none outside none}
+        .caption{margin-top:.5em;font-style:italic}
+        table.simple{border-spacing:0;border-collapse:collapse;border-bottom:3px solid #005a9c}
+        .simple th{background:#005a9c;color:#fff;padding:3px 5px;text-align:left}
+        .simple th a{color:#fff;padding:3px 5px;text-align:left}
+        .simple th[scope=row]{background:inherit;color:inherit;border-top:1px solid #ddd}
+        .simple td{padding:3px 10px;border-top:1px solid #ddd}
+        .simple tr:nth-child(even){background:#f0f6ff}
+        .section dd>p:first-child{margin-top:0}
+        .section dd>p:last-child{margin-bottom:0}
+        .section dd{margin-bottom:1em}
+        .section dl.attrs dd,.section dl.eldef dd{margin-bottom:0}
+        #issue-summary>ul{column-count:2}
+        #issue-summary li{list-style:none;display:inline-block}
+        details.respec-tests-details{margin-left:1em;display:inline-block;vertical-align:top}
+        details.respec-tests-details>*{padding-right:2em}
+        details.respec-tests-details[open]{z-index:999999;position:absolute;border:thin solid #cad3e2;border-radius:.3em;background-color:#fff;padding-bottom:.5em}
+        details.respec-tests-details[open]>summary{border-bottom:thin solid #cad3e2;padding-left:1em;margin-bottom:1em;line-height:2em}
+        details.respec-tests-details>ul{width:100%;margin-top:-.3em}
+        details.respec-tests-details>li{padding-left:1em}
+        a[href].self-link:hover{opacity:1;text-decoration:none;background-color:transparent}
+        h2,h3,h4,h5,h6{position:relative}
+        aside.example .marker>a.self-link{color:inherit}
+        h2>a.self-link,h3>a.self-link,h4>a.self-link,h5>a.self-link,h6>a.self-link{border:none;color:inherit;font-size:83%;height:2em;left:-1.6em;opacity:.5;position:absolute;text-align:center;text-decoration:none;top:0;transition:opacity .2s;width:2em}
+        h2>a.self-link::before,h3>a.self-link::before,h4>a.self-link::before,h5>a.self-link::before,h6>a.self-link::before{content:"§";display:block}
+        @media (max-width:767px){
+            dd{margin-left:0}
+            h2>a.self-link,h3>a.self-link,h4>a.self-link,h5>a.self-link,h6>a.self-link{left:auto;top:auto}
+        }
+        @media print{
+            .removeOnSave{display:none}
+        }
+    </style>
+    <meta name="description" content="This document reports on implementations of R2RML [R2RML] specification. The main purpose of this document is to show that each feature of R2RML has been covered or not by the implementations. To evaluate the coverage of an implementation's features, the R2RML Test Cases [R2RMLTC] are used as point of reference.">
+    <style>
+        var{position:relative;cursor:pointer}
+        var[data-type]::after,var[data-type]::before{position:absolute;left:50%;top:-6px;opacity:0;transition:opacity .4s;pointer-events:none}
+        var[data-type]::before{content:"";transform:translateX(-50%);border-width:4px 6px 0 6px;border-style:solid;border-color:transparent;border-top-color:#000}
+        var[data-type]::after{content:attr(data-type);transform:translateX(-50%) translateY(-100%);background:#000;text-align:center;font-family:"Dank Mono","Fira Code",monospace;font-style:normal;padding:6px;border-radius:3px;color:#daca88;text-indent:0;font-weight:400}
+        var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
+    </style>
+    <script id="initialUserConfig" type="application/json">{
+            "specStatus": "CG-DRAFT",
+            "editors": [
+                {
+                    "name": "David Chaves-Fraga",
+                    "url": "https://dchaves.oeg-upm.net/",
+                    "company": "Universidad Politécnica de Madrid",
+                    "orcid": "https://orcid.org/0000-0003-3236-2789",
+                    "companyURL": "https://upm.es/"
+                },
+                {
+                    "name": "Pieter Heyvaert",
+                    "url": "https://pieterheyvaert.com/",
+                    "company": "Ghent University",
+                    "companyURL": "https://www.ugent.be/",
+                    "orcid": "https://orcid.org/0000-0002-1583-5719"
+                }
+            ],
+            "github": "kg-construct/r2rml-implementation-report",
+            "shortName": "r2rml-implementation-report",
+            "group": "kg-construct",
+            "publishISODate": "2021-04-13T00:00:00.000Z",
+            "generatedSubtitle": "Draft Community Group Report 13 April 2021"
+        }</script>
+    <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/cg-draft"></head>
+<body class="h-entry informative"><div class="head">
+    <a class="logo" href="https://www.w3.org/"><img alt="W3C" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72" height="48"></a> <h1 id="title" class="title">R2RML Implementation Report</h1>
+
+    <h2>
+        Draft Community Group Report
+        <time class="dt-published" datetime="2021-04-13">13 April 2021</time>
+    </h2>
+    <dl>
+
+
+        <dt>Latest editor's draft:</dt><dd><a href="https://kg-construct.github.io/r2rml-implementation-report/">https://kg-construct.github.io/r2rml-implementation-report/</a></dd>
+
+
+
+
+        <dt>Editors:</dt>
+        <dd class="p-author h-card vcard"><a class="u-url url p-name fn" href="https://dchaves.oeg-upm.net/">David Chaves-Fraga</a><a class="p-name orcid" href="https://orcid.org/0000-0003-3236-2789"><svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                    <style>
+
+                        .st1 {
+                            fill: #fff;
+                        }
+
+                    </style>
+                    <path d="M256 128c0 70.7-57.3 128-128 128S0 198.7 0 128 57.3 0 128 0s128 57.3 128 128z" fill="#a6ce39"></path>
+                    <path class="st1" d="M86.3 186.2H70.9V79.1h15.4v107.1zM108.9 79.1h41.6c39.6 0 57 28.3 57 53.6 0 27.5-21.5 53.6-56.8 53.6h-41.8V79.1zm15.4 93.3h24.5c34.9 0 42.9-26.5 42.9-39.7C191.7 111.2 178 93 148 93h-23.7v79.4zM88.7 56.8c0 5.5-4.5 10.1-10.1 10.1s-10.1-4.6-10.1-10.1c0-5.6 4.5-10.1 10.1-10.1s10.1 4.6 10.1 10.1z"></path>
+                </svg>
+            </a>
+            (<a class="p-org org h-org h-card" href="https://upm.es/">Universidad Politécnica de Madrid</a>)
+        </dd><dd class="p-author h-card vcard"><a class="u-url url p-name fn" href="https://pieterheyvaert.com/">Pieter Heyvaert</a><a class="p-name orcid" href="https://orcid.org/0000-0002-1583-5719"><svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                    <style>
+
+                        .st1 {
+                            fill: #fff;
+                        }
+
+                    </style>
+                    <path d="M256 128c0 70.7-57.3 128-128 128S0 198.7 0 128 57.3 0 128 0s128 57.3 128 128z" fill="#a6ce39"></path>
+                    <path class="st1" d="M86.3 186.2H70.9V79.1h15.4v107.1zM108.9 79.1h41.6c39.6 0 57 28.3 57 53.6 0 27.5-21.5 53.6-56.8 53.6h-41.8V79.1zm15.4 93.3h24.5c34.9 0 42.9-26.5 42.9-39.7C191.7 111.2 178 93 148 93h-23.7v79.4zM88.7 56.8c0 5.5-4.5 10.1-10.1 10.1s-10.1-4.6-10.1-10.1c0-5.6 4.5-10.1 10.1-10.1s10.1 4.6 10.1 10.1z"></path>
+                </svg>
+            </a>
+            (<a class="p-org org h-org h-card" href="https://www.ugent.be/">Ghent University</a>)
+        </dd>
+
+
+        <dt>Participate:</dt><dd>
+            <a href="https://github.com/kg-construct/r2rml-implementation-report/">GitHub kg-construct/r2rml-implementation-report</a>
+        </dd><dd>
+            <a href="https://github.com/kg-construct/r2rml-implementation-report/issues/">File a bug</a>
+        </dd><dd>
+            <a href="https://github.com/kg-construct/r2rml-implementation-report/commits/gh-pages">Commit history</a>
+        </dd><dd>
+            <a href="https://github.com/kg-construct/r2rml-implementation-report/pulls/">Pull requests</a>
+        </dd>
+    </dl>
+
+    <p class="copyright">
+        <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+        ©
+        2021
+
+        the Contributors to the R2RML Implementation Report
+        Specification, published by the
+        <a href="https://www.w3.org/community/kg-construct/">Knowledge Graph Construction Community Group</a> under the
+        <a href="https://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>. A human-readable
+        <a href="https://www.w3.org/community/about/agreements/cla-deed/">summary</a>
+        is available.
+
+    </p>
+    <hr title="Separator for header">
+</div>
+<section id="abstract" class="introductory"><h2>Abstract</h2>
     <p>
         This document reports on implementations of R2RML [<a href="https://www.w3.org/TR/r2rml/">R2RML</a>] specification. The main purpose of this document is to show that each feature of R2RML has been covered or not by the implementations. To evaluate the coverage of an implementation's features, the R2RML Test Cases [<a href="https://www.w3.org/2001/sw/rdb2rdf/test-cases/">R2RMLTC</a>] are used as point of reference.
     </p>
 </section>
-<section id='sotd'>
+<section id="sotd" class="introductory"><h2>Status of This Document</h2><p>
+        This specification was published by the
+        <a href="https://www.w3.org/community/kg-construct/">Knowledge Graph Construction Community Group</a>. It is not a W3C Standard nor is it
+        on the W3C Standards Track.
+
+        Please note that under the
+        <a href="https://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>
+        there is a limited opt-out and other conditions apply.
+
+        Learn more about
+        <a href="https://www.w3.org/community/">W3C Community and Business Groups</a>.
+    </p>
     <p>
 
     </p>
-</section>
+    <p>
+        <a href="https://github.com/kg-construct/r2rml-implementation-report/issues/">GitHub Issues</a> are preferred for
+        discussion of this specification.
+
+
+    </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#introduction"><bdi class="secno">1. </bdi>Introduction</a></li><li class="tocline"><a class="tocxref" href="#r2rml-processor"><bdi class="secno">2. </bdi>R2RML Processors</a></li><li class="tocline"><a class="tocxref" href="#test-results"><bdi class="secno">3. </bdi>Implementation Test Results</a></li></ol></nav>
 
 <section id="introduction">
-    <h2>Introduction</h2>
+    <h2 id="x1-introduction"><bdi class="secno">1. </bdi>Introduction<a class="self-link" aria-label="§" href="#introduction"></a></h2>
     The goal of this report is to verify the R2RML specification is implementable.
 </section>
 
 <section id="r2rml-processor">
-    <h2>R2RML Processors</h2>
+    <h2 id="x2-r2rml-processors"><bdi class="secno">2. </bdi>R2RML Processors<a class="self-link" aria-label="§" href="#r2rml-processor"></a></h2>
     In the following the R2RML processors are listed that have been used in the R2RML Implementation report.
 
     <table>
@@ -62,9 +238,10 @@
             <th>Name</th>
             <th>Version</th>
             <th>Test date</th>
-{#            <th>Contact</th>#}
+
             <th>Web page</th>
         </tr>
+
 
         {% for processor in processors %}
         <tr>
@@ -80,7 +257,7 @@
 </section>
 
 <section id="test-results">
-    <h2>Implementation Test Results</h2>
+    <h2 id="x3-implementation-test-results"><bdi class="secno">3. </bdi>Implementation Test Results<a class="self-link" aria-label="§" href="#test-results"></a></h2>
 
     <table>
         <tbody>
@@ -110,5 +287,120 @@
     </table>
 </section>
 
+
+<p role="navigation" id="back-to-top">
+    <a href="#title"><abbr title="Back to Top">↑</abbr></a>
+</p>
+{% raw %}
+<script id="respec-dfn-panel">(() => {
+// @ts-check
+    if (document.respec) {
+      document.respec.ready.then(dfnPanel);
+    } else {
+      dfnPanel();
+    }
+
+    function dfnPanel() {
+      /** @type {HTMLElement} */
+      let panel;
+      document.body.addEventListener("click", event => {
+        if (!(event.target instanceof HTMLElement)) return;
+
+        /** @type {HTMLElement} */
+        const el = event.target;
+
+        const action = deriveAction(el);
+        switch (action) {
+          case "show": {
+            if (panel) hidePanel(panel);
+            /** @type {HTMLElement} */
+            const dfn = el.closest("dfn, .index-term");
+            panel = document.getElementById(`dfn-panel-for-${dfn.id}`);
+            displayPanel(dfn, panel, { x: event.clientX, y: event.clientY });
+            break;
+          }
+          case "dock": {
+            panel.style.left = null;
+            panel.style.top = null;
+            panel.classList.add("docked");
+            break;
+          }
+          case "hide": {
+            hidePanel(panel);
+            break;
+          }
+        }
+      });
+    }
+
+    /** @param {HTMLElement} clickTarget */
+    function deriveAction(clickTarget) {
+      const hitALink = !!clickTarget.closest("a");
+      if (clickTarget.closest("dfn, .index-term")) {
+        return hitALink ? null : "show";
+      }
+      if (clickTarget.closest(".dfn-panel")) {
+        if (hitALink) {
+          const clickedSelfLink = clickTarget.classList.contains("self-link");
+          return clickedSelfLink ? "hide" : "dock";
+        }
+        const panel = clickTarget.closest(".dfn-panel");
+        return panel.classList.contains("docked") ? "hide" : null;
+      }
+      if (document.querySelector(".dfn-panel:not([hidden])")) {
+        return "hide";
+      }
+      return null;
+    }
+
+    /**
+     * @param {HTMLElement} dfn
+     * @param {HTMLElement} panel
+     * @param {{ x: number, y: number }} clickPosition
+     */
+    function displayPanel(dfn, panel, { x, y }) {
+      panel.hidden = false;
+      // distance (px) between edge of panel and the pointing triangle (caret)
+      const MARGIN = 20;
+
+      const dfnRects = dfn.getClientRects();
+      // Find the `top` offset when the `dfn` can be spread across multiple lines
+      let closestTop = 0;
+      let minDiff = Infinity;
+      for (const rect of dfnRects) {
+        const { top, bottom } = rect;
+        const diffFromClickY = Math.abs((top + bottom) / 2 - y);
+        if (diffFromClickY < minDiff) {
+          minDiff = diffFromClickY;
+          closestTop = top;
+        }
+      }
+
+      const top = window.scrollY + closestTop + dfnRects[0].height;
+      const left = x - MARGIN;
+      panel.style.left = `${left}px`;
+      panel.style.top = `${top}px`;
+
+      // Find if the panel is flowing out of the window
+      const panelRect = panel.getBoundingClientRect();
+      const SCREEN_WIDTH = Math.min(window.innerWidth, window.screen.width);
+      if (panelRect.right > SCREEN_WIDTH) {
+        const newLeft = Math.max(MARGIN, x + MARGIN - panelRect.width);
+        const newCaretOffset = left - newLeft;
+        panel.style.left = `${newLeft}px`;
+        /** @type {HTMLElement} */
+        const caret = panel.querySelector(".caret");
+        caret.style.left = `${newCaretOffset}px`;
+      }
+    }
+
+    /** @param {HTMLElement} panel */
+    function hidePanel(panel) {
+      panel.hidden = true;
+      panel.classList.remove("docked");
+    }
+  })()</script><script src="https://www.w3.org/scripts/TR/2016/fixup.js">
+</script>
+{% endraw %}
 </body>
 </html>
