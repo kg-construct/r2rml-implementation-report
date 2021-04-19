@@ -12,6 +12,7 @@ x-walder-datasources:
   - https://raw.githubusercontent.com/oeg-dataintegration/r2rml/master/results/results.ttl # R2RML-F
   - https://raw.githubusercontent.com/oeg-dataintegration/db2triples/master/results/results.ttl # Db2triples
   - http://localhost:8080/results-ontop.ttl
+  - https://rml.io/tools/rmlmapper/r2rml-test-cases-results.ttl # RMLMapper
   - https://raw.githubusercontent.com/kg-construct/r2rml-test-cases-support/main/manifest.ttl # Descriptions of the test cases
 paths:
   /:
