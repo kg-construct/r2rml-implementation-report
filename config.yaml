@@ -48,7 +48,7 @@ paths:
         json-ld-context: >
           {
             "earl": "http://www.w3.org/ns/earl#",
-            "dcterms": "http://purl.org/dc/elements/1.1/",
+            "dcterms": "http://purl.org/dc/terms/",
             "doap": "http://usefulinc.com/ns/doap#",
             "rdb2rdftest": "http://purl.org/NET/rdb2rdf-test#",
             "foaf": "http://xmlns.com/foaf/0.1/",
@@ -66,7 +66,7 @@ paths:
             "version": "doap:release",
             "assertedBy": "earl:assertedBy",
             "fullname": "foaf:name",
-            "date": "doap:created",
+            "date": "dcterms:date",
             "homepage": "doap:homepage",
             "type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
           }
