@@ -30,7 +30,22 @@ function formatDate(data) {
   return data;
 }
 
+function setRDBMS(data) {
+  if (data.data.length > 0 && data.data[0].version) {
+    data.data.forEach(processor => {
+      const matches = processor.name.match(/-([^-]+)$/);
+      processor.rdbms = matches[1].toLowerCase();
+      processor.name = processor.name.replace(matches[0], '');
+    });
+
+    console.log(data);
+  }
+
+  return data;
+}
+
 module.exports = {
   processAssertions,
-  formatDate
+  formatDate,
+  setRDBMS
 }
