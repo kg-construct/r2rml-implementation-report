@@ -75,6 +75,8 @@ paths:
           source: utils.js
         formatDate:
           source: utils.js
+        setRDBMS:
+          source: utils.js
       responses:
         200:
           description: R2RML implementation report
