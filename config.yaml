@@ -9,7 +9,7 @@ x-walder-resources:
   public: public
 x-walder-datasources:
   - https://raw.githubusercontent.com/jatoledo/r2rml-implementation-report/main/test-cases/results.ttl
-  - https://raw.githubusercontent.com/chrdebru/r2rml/master/r2rml-test-cases-support-local/results-mysql.ttl # R2RML-F
+  - https://raw.githubusercontent.com/chrdebru/r2rml/master/r2rml-test-cases-support-local/results.ttl # R2RML-F
   - https://raw.githubusercontent.com/oeg-dataintegration/db2triples/master/results/results.ttl # Db2triples
   - http://localhost:8080/results-ontop.ttl
   - https://rml.io/tools/rmlmapper/r2rml-test-cases-results.ttl # RMLMapper
