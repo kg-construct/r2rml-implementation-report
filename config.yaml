@@ -45,6 +45,13 @@ paths:
                 }
               }
             }
+          testers: >
+            {
+              processor @single
+              assertedBy @single {
+                fullname @single
+              }
+            }
         json-ld-context: >
           {
             "earl": "http://www.w3.org/ns/earl#",
@@ -76,6 +83,8 @@ paths:
         formatDate:
           source: utils.js
         setRDBMS:
+          source: utils.js
+        processTesters:
           source: utils.js
       responses:
         200:

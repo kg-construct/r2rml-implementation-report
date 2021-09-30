@@ -250,8 +250,9 @@
         <tr>
             <th>Name</th>
             <th>Version</th>
+            <th>Database system</th>
             <th>Test date</th>
-
+            <th>Tester</th>
             <th>Web page</th>
         </tr>
 
@@ -260,8 +261,9 @@
         <tr>
             <td>{{ processor.name }}</td>
             <td>v{{ processor.version }}</td>
+            <td>{{ processor.rdbmsCap }}</td>
             <td>{{ processor.date }}</td>
-{#            <td></td>#}
+            <td>{{ testers[processor.id] }}</td>
             <td><a href="{{ processor.homepage }}">{{ processor.homepage }}</a></td>
         </tr>
         {% endfor %}
