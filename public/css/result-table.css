@@ -10,6 +10,10 @@ td.failed {
     background-color: red;
 }
 
+td.untested {
+    background-color: yellow;
+}
+
 td.result {
     text-align: center;
     font-weight: bold;
