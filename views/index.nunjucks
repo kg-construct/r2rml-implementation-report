@@ -300,6 +300,8 @@
                                 <td class="passed result"><a href="http://www.w3.org/ns/earl#passed">passed</a></td>
                             {% elseif testCase.assertions[processor.id] == "http://www.w3.org/ns/earl#failed" %}
                                 <td class="failed result"><a href="http://www.w3.org/ns/earl#failed">failed</a></td>
+                            {% elseif testCase.assertions[processor.id] == "http://www.w3.org/ns/earl#untested" %}
+                                <td class="untested result"><a href="http://www.w3.org/ns/earl#untested">untested</a></td>
                             {% else %}
                                 <td class="result">ERROR</td>
                             {% endif %}
@@ -337,6 +339,8 @@
                                 <td class="passed result"><a href="http://www.w3.org/ns/earl#passed">passed</a></td>
                             {% elseif testCase.assertions[processor.id] == "http://www.w3.org/ns/earl#failed" %}
                                 <td class="failed result"><a href="http://www.w3.org/ns/earl#failed">failed</a></td>
+                            {% elseif testCase.assertions[processor.id] == "http://www.w3.org/ns/earl#untested" %}
+                                <td class="untested result"><a href="http://www.w3.org/ns/earl#untested">untested</a></td>
                             {% else %}
                                 <td class="result">ERROR</td>
                             {% endif %}
